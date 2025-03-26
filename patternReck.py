@@ -46,14 +46,14 @@ def getHighlightedZones(width, height, offleft, offtop, z_x, z_y, dx, dy, start,
                         'RGB', 
                         (screenShot.width, screenShot.height), 
                         screenShot.rgb, 
-                    ))#cv2.imread("after.png")
+                    ))#cv2.imread("images/after.png")
         pyautogui.keyDown('y')
         screenShot = sct.grab(mon)
         image2 = np.array(Image.frombytes(
                         'RGB', 
                         (screenShot.width, screenShot.height), 
                         screenShot.rgb, 
-                    ))#cv2.imread("before.png")
+                    ))#cv2.imread("images/before.png")
         time.sleep(0.1)
         pyautogui.keyUp('y')
         image3 = image1 - image2

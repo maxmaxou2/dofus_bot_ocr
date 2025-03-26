@@ -194,9 +194,9 @@ class DofusWindow() :
             
     def updateTHInterface(self, sh=False) :
         s_tab = []
-        x,y,w,h = DynamicImage("THTitleFixed.png").locate(self, confidence=self.confidence2)
+        x,y,w,h = DynamicImage("images/THTitleFixed.png").locate(self, confidence=self.confidence2)
         for lettre in ['H', 'B', 'G', 'D']:
-            t_tab = DynamicImage('fleche'+lettre+'.png').locateAll(self, region=[x-20, y, w, 600])
+            t_tab = DynamicImage('images/fleche'+lettre+'.png').locateAll(self, region=[x-20, y, w, 600])
             for t in t_tab:
                 if t is not None:
                     s_tab.append((t[0], t[1], t[2], t[3], dir[lettre]))
@@ -261,7 +261,7 @@ class DofusWindow() :
         self.click(self.interface['x_flag'], self.interface['y_flag'])
     
     def getEndStageButton(self) :
-        return DynamicImage("buttonFixed.png").locate(self, region=[self.interface['completeX'],self.interface['y'],self.interface['completeW'], int(self.interface['h']+32)])
+        return DynamicImage("images/buttonFixed.png").locate(self, region=[self.interface['completeX'],self.interface['y'],self.interface['completeW'], int(self.interface['h']+32)])
 
     def formatForOCR(self, img, fx=1, fy=1, start=constants['start'], span=constants['span']) :
         mask = cv2.inRange(img, (start, start, start), (start+span, start+span, start+span))
@@ -286,7 +286,7 @@ class DofusWindow() :
             return str
         
     def updateFirstPosition(self) :
-        x,y,w,h = DynamicImage("locate.png").locate(self)
+        x,y,w,h = DynamicImage("images/locate.png").locate(self)
         img = self.formatForOCR(cv2.bitwise_not(showAround(x+w,y,self.interface['w'],h,sh=False)), fx=1.5, fy=1.5, start=100, span=150)
         str = pytesseract.image_to_string(img, lang='fra')
         print(str)
@@ -314,9 +314,9 @@ class DofusWindow() :
             log("Current position :"+str(self.pos))
 
     def oldSetupMovesClickLocations(self) :
-        _,y_u,_,_ = DynamicImage("gear.png").locate(self, confidence=self.confidence2)
-        x_r,y_d = DynamicImage("eye.png").locateCenter(self, confidence=self.confidence2)
-        x_l,_,_,_ = DynamicImage("plus.png").locate(self, confidence=self.confidence2)
+        _,y_u,_,_ = DynamicImage("images/gear.png").locate(self, confidence=self.confidence2)
+        x_r,y_d = DynamicImage("images/eye.png").locateCenter(self, confidence=self.confidence2)
+        x_l,_,_,_ = DynamicImage("images/plus.png").locate(self, confidence=self.confidence2)
 
         self.moves = [[(x_l, int(self.h/4)),(x_l, int(self.h*3/4))], [(int(self.w/3), y_u),(int(self.w*2/3), y_u)],
                       [(x_r, int(self.h/4)),(x_r, int(self.h*3/4))], [(int(self.w/3), y_d),(int(self.w*2/3), y_d)]]
@@ -397,7 +397,7 @@ class DofusWindow() :
             log("Interface not visible !")
             return
         self.updateTHInterface()
-        for path,reg in [('cancel.png', [self.interface['completeX'], self.interface['completeY'], self.interface['completeW'], self.interface['completeH']*5]), ('confirm.png', None)] :
+        for path,reg in [('images/cancel.png', [self.interface['completeX'], self.interface['completeY'], self.interface['completeW'], self.interface['completeH']*5]), ('images/confirm.png', None)] :
             x,y = DynamicImage(path).locateCenter(self, region = reg)
             self.click(x,y)
             time.sleep(2)
@@ -408,7 +408,7 @@ class DofusWindow() :
 
     def isPhorreurHere(self) :
         for number in range(1, 13) :
-            tup = pyautogui.locateOnScreen("phorreur"+str(number)+".png", confidence=0.85)
+            tup = pyautogui.locateOnScreen("images/phorreur"+str(number)+".png", confidence=0.85)
             if tup is not None :
                 log("Phorreur found at ("+str(self.pos[0])+","+str(self.pos[1])+")")
                 return True
@@ -446,11 +446,11 @@ class DofusWindow() :
     
     def inFight(self) :
         self.focus()
-        tup = DynamicImage('victory.png').locate(self, confidence=0.7)
+        tup = DynamicImage('images/victory.png').locate(self, confidence=0.7)
         i = 0
         while tup is None or i < 6:
             for i in range(1,7) :
-                tup = DynamicImage('treasure'+str(i)+'.png').locate(self, confidence=0.9)
+                tup = DynamicImage('images/treasure'+str(i)+'.png').locate(self, confidence=0.9)
                 if tup is not None :
                     pyautogui.hotkey('a')
                     time.sleep(0.5)
@@ -460,7 +460,7 @@ class DofusWindow() :
                     pyautogui.press("f1")
                     time.sleep(5)
                     continue
-            tup = DynamicImage('victory.png').locate(self, confidence=0.7)
+            tup = DynamicImage('images/victory.png').locate(self, confidence=0.7)
             i += 1
         log("Fight finished !")
 
@@ -473,15 +473,15 @@ class DofusWindow() :
         self.updatePosition()
         while keep :
             log("Begin loop !")
-            tup = DynamicImage('fight_buttonFixed.png').locate(self)
+            tup = DynamicImage('images/fight_buttonFixed.png').locate(self)
             if tup is not None :
                 log("Fight available !")
                 self.clickCenter(tup)
                 time.sleep(5)
-                self.clickCenter(DynamicImage('ready.png').locate(self))
+                self.clickCenter(DynamicImage('images/ready.png').locate(self))
                 time.sleep(10)
                 self.inFight()
-                self.clickCenter(DynamicImage('close_fight.png').locate(self))
+                self.clickCenter(DynamicImage('images/close_fight.png').locate(self))
                 self.getNewTH()
                 return
             

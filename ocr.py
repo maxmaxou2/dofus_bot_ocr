@@ -37,7 +37,7 @@ def getInterfaceData():
         cv2.imshow("oui", np.array(img))
         cv2.waitKey(0)"""
     for lettre in ['H', 'B', 'G', 'D']:
-        t_tab = pyautogui.locateAllOnScreen('fleche'+lettre+'.png', region=[
+        t_tab = pyautogui.locateAllOnScreen('images/fleche'+lettre+'.png', region=[
                                             mon['left']-20, mon['top'], mon['width'], mon['height']], confidence=confidence)
         for t in t_tab:
             if t is not None:
@@ -62,12 +62,12 @@ def getInterfaceData():
 
 start, span = 210, 45
 def oldGetPosition(a,b,c) :
-    x_sun, y_sun = pyautogui.locateCenterOnScreen("sun.png", confidence=confidence)
-    x_map, y_map = pyautogui.locateCenterOnScreen("map.png", confidence=confidence)
+    x_sun, y_sun = pyautogui.locateCenterOnScreen("images/sun.png", confidence=confidence)
+    x_map, y_map = pyautogui.locateCenterOnScreen("images/map.png", confidence=confidence)
 
     pyautogui.rightClick(x=x_sun, y=y_map)
     time.sleep(0.05)
-    x,y = pyautogui.locateCenterOnScreen("getposition.png", confidence=confidence)
+    x,y = pyautogui.locateCenterOnScreen("images/getposition.png", confidence=confidence)
     pyautogui.leftClick(x=x,y=y)
     pyautogui.hotkey("ctrl", "a")
     pyautogui.hotkey("ctrl", "c")
@@ -219,13 +219,13 @@ def full_stage():
             return
 
         # Click on the flag
-        x_flag,y_flag = pyautogui.center(pyautogui.locateOnScreen('flag.png', region=(mon['left']+20, mon['top'], mon['width']+45, int(top+height-mon['top'])+10), confidence=0.7))
+        x_flag,y_flag = pyautogui.center(pyautogui.locateOnScreen('images/flag.png', region=(mon['left']+20, mon['top'], mon['width']+45, int(top+height-mon['top'])+10), confidence=0.7))
         pyautogui.leftClick(x=x_flag, y=y_flag)
         time.sleep(0.1)
         pyautogui.moveTo(x=int(mon['left']+mon['width']/2), y=int(mon['top']+mon['height']/2))
 
         # Check if stage is finished
-        tup = pyautogui.locateOnScreen('button.png', region=(mon['left'], mon['top'], mon['width']+45, int(top+height-mon['top'])+50), confidence=0.7)
+        tup = pyautogui.locateOnScreen('images/button.png', region=(mon['left'], mon['top'], mon['width']+45, int(top+height-mon['top'])+50), confidence=0.7)
         if tup is not None :
             print("Stage process begining")
             """with mss() as sct:
@@ -243,7 +243,7 @@ def full_stage():
             pyautogui.leftClick(button_x, button_y)
             time.sleep(0.3)
             print('Stage finished !')
-            tup = pyautogui.locateOnScreen('fight_button.png', confidence=0.7)
+            tup = pyautogui.locateOnScreen('images/fight_button.png', confidence=0.7)
             if tup is not None :
                 print("Fight is available !")
                 return

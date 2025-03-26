@@ -21,7 +21,7 @@ def move(direction, click) :
         return False"""
     
 action_types = {"move": ["G", "H", "D", "B"], "click":["pnj", "out"], "keypress":["h"], "wait": [0.4]}
-routes = {"THzaap":"keypress:h-wait:3-pnj:zaap.png-wait:2-pnj:champsCania.png-wait:1-pnj:teleport.png-wait:4",
-          "THmoveIn":"D-D-out:door1.png-wait:5-out:outTH1.png-wait:5",
-          "THget":"pnj:treasurePNJ.png-wait:2-pnj:treasurePNJ2.png-wait:6",
-          "THmoveOut":"out:outTH2.png-wait:6-out:door2.png-wait:6"}
+routes = {"THzaap":"keypress:h-wait:3-pnj:images/zaap.png-wait:2-pnj:images/champsCania.png-wait:1-pnj:images/teleport.png-wait:4",
+          "THmoveIn":"D-D-out:images/door1.png-wait:5-out:images/outTH1.png-wait:5",
+          "THget":"pnj:images/treasurePNJ.png-wait:2-pnj:images/treasurePNJ2.png-wait:6",
+          "THmoveOut":"out:images/outTH2.png-wait:6-out:images/door2.png-wait:6"}

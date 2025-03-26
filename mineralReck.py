@@ -41,7 +41,7 @@ nb_sorties = 4
 def getExits() :
     exits = []
     for i in range(1,nb_sorties+1) :
-        located = pyautogui.locateAllOnScreen('out'+str(i)+'.png', confidence=0.6, region=[offleft, offtop, width, height])
+        located = pyautogui.locateAllOnScreen('images/out'+str(i)+'.png', confidence=0.6, region=[offleft, offtop, width, height])
         if located is not None :
             for s in located :
                 exits.append((int(s.left+s.width/2), int(s.top+s.height/2)))
