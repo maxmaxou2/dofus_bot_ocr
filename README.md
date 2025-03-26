@@ -1,0 +1,1 @@
+# dofus_bot_ocr
